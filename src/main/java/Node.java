@@ -19,4 +19,15 @@ public class Node {
         this.up = up;
         this.down = down;
     }
+
+//    public BitSet getEncoding() {
+//        BitSet bitSet = new BitSet(encoding.length());
+//        for (int i = 0; i < encoding.length(); i++) {
+//            if (encoding.charAt(i) == '1') {
+//                bitSet.set(i);
+//            }
+//        }
+//
+//        return bitSet;
+//    }
 }

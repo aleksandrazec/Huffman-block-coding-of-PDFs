@@ -12,7 +12,7 @@ import static java.lang.Math.ceil;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String path = "books/alices_adventures_in_wonderland.pdf"; // this might not work, change to absolute path if needed.
+        String path = "D:\\InteliJ\\IdeaProjects\\HuffmanCoding\\Huffman-block-coding-of-PDF-files\\books\\alices_adventures_in_wonderland.pdf"; // this might not work, change to absolute path if needed.
         byte[] book= loadFile(path);
 
         BitSet bitSet = BitSet.valueOf(book);
@@ -20,31 +20,21 @@ public class Main {
         System.out.println(bitSet.size());
 
         Map<BitSet, Integer> frequencyMap = new HashMap<>();
-        for (int i = 0; i < bitSet.length()-16; i++) {
+        for (int i = 0; i < bitSet.length(); i+=16) {
             frequencyMap.put(bitSet.get(i,i+16), frequencyMap.getOrDefault(bitSet.get(i,i+16),0) + 1);
         }
         System.out.println(frequencyMap.size());
-//        for (BitSet name : frequencyMap.keySet()) {
-//            String key = name.toString();
-//            String value = frequencyMap.get(name).toString();
-//            System.out.println(key + " " + value);
-//        }
 
         Map<BitSet, Double> probFreqMap = new HashMap<>();
         for (BitSet bitSet1 : frequencyMap.keySet()){
-            probFreqMap.put(bitSet1, Double.valueOf(frequencyMap.get(bitSet1))/(bitSet.length()-16));
+            probFreqMap.put(bitSet1, Double.valueOf(frequencyMap.get(bitSet1))/(bitSet.length()/16));
         }
         System.out.println(probFreqMap.size());
-//        float sum = 0;
-//        for (BitSet name : probFreqMap.keySet()) {
-//            String key = name.toString();
-//            String value = probFreqMap.get(name).toString();
-//            System.out.println(key + " " + value);
-//            sum+= probFreqMap.get(name);
-//        }
-//
-//        System.out.println(sum);
         HuffmanTree huffmanTree = new HuffmanTree(probFreqMap);
+        BitSet encodedBitSet = huffmanTree.Encode(bitSet);
+//        System.out.println(encodedBitSet);
+        byte[] encodedByte = encodedBitSet.toByteArray();
+//        System.out.println(encodedByte[0]);
     }
 
     public static byte[] loadFile(String sourcePath) throws IOException
