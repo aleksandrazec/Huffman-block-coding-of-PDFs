@@ -38,7 +38,7 @@ public class HuffmanTree {
             Node internal=new Node(n1,n2);
             priorityQueue.add(internal);
         }
-        System.out.println(priorityQueue.peek().frequency);
+//        System.out.println(priorityQueue.peek().frequency);
         TraverseTree(priorityQueue.poll(), "");
     }
     private void TraverseTree(Node node, String currentString){

@@ -14,36 +14,43 @@ import static java.nio.file.Files.readAllBytes;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String path = "books/alices_adventures_in_wonderland.pdf"; // this might not work, change to absolute path if needed.
+        encodeBook("books/alices_adventures_in_wonderland.pdf");
+        encodeBook("books/aliceintxt.txt");
+        encodeBook("books/the_brothers_karamazov.pdf");
+        encodeBook("books/karamazovintxt.txt");
+    }
+
+    public static void encodeBook(String path) throws IOException {
         byte[] book= loadFile(path);
 
         BitSet bitSet = BitSet.valueOf(book);
-        System.out.println(bitSet.get(0,16));
-        System.out.println(bitSet.size());
+//        System.out.println(bitSet.get(0,16));
+//        System.out.println(bitSet.size());
 
         Map<BitSet, Integer> frequencyMap = new HashMap<>();
         for (int i = 0; i < bitSet.length(); i+=16) {
             frequencyMap.put(bitSet.get(i,i+16), frequencyMap.getOrDefault(bitSet.get(i,i+16),0) + 1);
         }
-        System.out.println(frequencyMap.size());
+//        System.out.println(frequencyMap.size());
 
         Map<BitSet, Double> probFreqMap = new HashMap<>();
         for (BitSet bitSet1 : frequencyMap.keySet()){
             probFreqMap.put(bitSet1, Double.valueOf(frequencyMap.get(bitSet1))/(bitSet.length()/16));
         }
-        System.out.println(probFreqMap.size());
+//        System.out.println(probFreqMap.size());
         HuffmanTree huffmanTree = new HuffmanTree(probFreqMap);
         BitSet encodedBitSet = huffmanTree.Encode(bitSet);
 //        System.out.println(encodedBitSet);
         byte[] encodedByte = encodedBitSet.toByteArray();
 //        System.out.println(encodedByte[0]);
         int NumBytes = encodedByte.length;
-        System.out.println("Compressed Bytes: " + NumBytes);
+        System.out.println("Encoding of "+ path);
         byte[] array = readAllBytes(Path.of(path));
         int NumBytes2 = array.length;
-        System.out.println("PDF Bytes: " + NumBytes2);
+        System.out.println("Original File Bytes: " + NumBytes2);
+        System.out.println("Compressed Bytes: " + NumBytes);
+        System.out.println();
     }
-
     public static byte[] loadFile(String sourcePath) throws IOException
     {
         InputStream inputStream = null;
