@@ -17,17 +17,34 @@ public class Main {
 
         BitSet bitSet = BitSet.valueOf(book);
         System.out.println(bitSet.get(0,16));
+        System.out.println(bitSet.size());
 
         Map<BitSet, Integer> frequencyMap = new HashMap<>();
-        for (int i = 0; i < bitSet.length(); i+=16) {
+        for (int i = 0; i < bitSet.length()-16; i++) {
             frequencyMap.put(bitSet.get(i,i+16), frequencyMap.getOrDefault(bitSet.get(i,i+16),0) + 1);
         }
+        System.out.println(frequencyMap.size());
+//        for (BitSet name : frequencyMap.keySet()) {
+//            String key = name.toString();
+//            String value = frequencyMap.get(name).toString();
+//            System.out.println(key + " " + value);
+//        }
 
-        for (BitSet name : frequencyMap.keySet()) {
-            String key = name.toString();
-            String value = frequencyMap.get(name).toString();
-            System.out.println(key + " " + value);
+        Map<BitSet, Double> probFreqMap = new HashMap<>();
+        for (BitSet bitSet1 : frequencyMap.keySet()){
+            probFreqMap.put(bitSet1, Double.valueOf(frequencyMap.get(bitSet1))/(bitSet.length()/16));
         }
+        System.out.println(probFreqMap.size());
+//        float sum = 0;
+//        for (BitSet name : probFreqMap.keySet()) {
+//            String key = name.toString();
+//            String value = probFreqMap.get(name).toString();
+//            System.out.println(key + " " + value);
+//            sum+= probFreqMap.get(name);
+//        }
+//
+//        System.out.println(sum);
+        HuffmanTree huffmanTree = new HuffmanTree(probFreqMap);
     }
 
     public static byte[] loadFile(String sourcePath) throws IOException
