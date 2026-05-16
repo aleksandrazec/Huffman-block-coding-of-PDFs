@@ -4,32 +4,30 @@ import java.io.InputStream;
 import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.BitSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static java.lang.Math.ceil;
 
 public class Main {
-
     public static void main(String[] args) throws IOException {
-        String path = "books/alices_adventures_in_wonderland.pdf";
+        String path = "books/alices_adventures_in_wonderland.pdf"; // this might not work, change to absolute path if needed.
         byte[] book= loadFile(path);
-//        for (int i = 0; i < book.length; i++) {
-//            System.out.print(book[i]);
-//        }
+
         BitSet bitSet = BitSet.valueOf(book);
         System.out.println(bitSet.get(0,16));
-//        byte[] bytes=bitSet.toByteArray();
-//        String s=new String(bytes, StandardCharsets.ISO_8859_1);
-//        System.out.println(s);
-//        BitSet[] bitSetsEight=new BitSet[book.length];
-//        for (int i = 0; i < book.length; i++) {
-//            bitSetsEight[i]=new BitSet(8);
-//            for (int j = 0; j < 8; j++) {
-//                if((book[i] & (1<<j))>0){
-//                    bitSetsEight[i].set(j);
-//                }
-//            }
-//        }
 
+        Map<BitSet, Integer> frequencyMap = new HashMap<>();
+        for (int i = 0; i < bitSet.length(); i+=16) {
+            frequencyMap.put(bitSet.get(i,i+16), frequencyMap.getOrDefault(bitSet.get(i,i+16),0) + 1);
+        }
+
+        for (BitSet name : frequencyMap.keySet()) {
+            String key = name.toString();
+            String value = frequencyMap.get(name).toString();
+            System.out.println(key + " " + value);
+        }
     }
 
     public static byte[] loadFile(String sourcePath) throws IOException
