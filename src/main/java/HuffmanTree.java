@@ -29,9 +29,21 @@ public class HuffmanTree {
 //            System.out.println(i+"    "+n.frequency);
 //        }
         while (priorityQueue.size()>1){
-            priorityQueue.poll();
-
+            Node n1 = priorityQueue.poll();
+            Node n2 = priorityQueue.poll();
+            Node internal=new Node(n1,n2);
+            priorityQueue.add(internal);
+        }
+        TraverseTree(priorityQueue.poll(), "");
+    }
+    private void TraverseTree(Node node, String currentString){
+        node.encoding=currentString;
+//        System.out.println(currentString);
+        if(node.up!=null) {
+            TraverseTree(node.up, currentString + "0");
+        }
+        if(node.down!=null) {
+            TraverseTree(node.down, currentString + "1");
         }
     }
-
 }

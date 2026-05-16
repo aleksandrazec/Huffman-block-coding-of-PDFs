@@ -32,7 +32,7 @@ public class Main {
 
         Map<BitSet, Double> probFreqMap = new HashMap<>();
         for (BitSet bitSet1 : frequencyMap.keySet()){
-            probFreqMap.put(bitSet1, Double.valueOf(frequencyMap.get(bitSet1))/(bitSet.length()/16));
+            probFreqMap.put(bitSet1, Double.valueOf(frequencyMap.get(bitSet1))/(bitSet.length()-16));
         }
         System.out.println(probFreqMap.size());
 //        float sum = 0;

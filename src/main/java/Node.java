@@ -5,6 +5,7 @@ public class Node {
     public BitSet value;
     public Node up;
     public Node down;
+    public String encoding;
 
     Node(BitSet value,Double frequency) {
         this.frequency = frequency;
