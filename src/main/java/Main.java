@@ -3,16 +3,18 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.FileInputStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import static java.lang.Math.ceil;
+import static java.nio.file.Files.readAllBytes;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String path = "D:\\InteliJ\\IdeaProjects\\HuffmanCoding\\Huffman-block-coding-of-PDF-files\\books\\alices_adventures_in_wonderland.pdf"; // this might not work, change to absolute path if needed.
+        String path = "books/alices_adventures_in_wonderland.pdf"; // this might not work, change to absolute path if needed.
         byte[] book= loadFile(path);
 
         BitSet bitSet = BitSet.valueOf(book);
@@ -35,6 +37,11 @@ public class Main {
 //        System.out.println(encodedBitSet);
         byte[] encodedByte = encodedBitSet.toByteArray();
 //        System.out.println(encodedByte[0]);
+        int NumBytes = encodedByte.length;
+        System.out.println("Compressed Bytes: " + NumBytes);
+        byte[] array = readAllBytes(Path.of(path));
+        int NumBytes2 = array.length;
+        System.out.println("PDF Bytes: " + NumBytes2);
     }
 
     public static byte[] loadFile(String sourcePath) throws IOException
