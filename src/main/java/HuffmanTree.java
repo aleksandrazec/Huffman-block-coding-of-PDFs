@@ -53,16 +53,17 @@ public class HuffmanTree {
     }
 
     public BitSet Encode(BitSet input) {
-        String encodedInput = "";
+        BitSet bitSet = new BitSet();
+        String temp;
+        int currentLength=0;
         for (int i = 0; i < input.length(); i+=16) {
-            Node temp = encodingMap.get(input.get(i,i+16));
-            encodedInput += temp.encoding;
-        }
-        BitSet bitSet = new BitSet(encodedInput.length());
-        for (int i = 0; i < encodedInput.length(); i++) {
-            if(encodedInput.charAt(i) == '1'){
-                bitSet.set(i);
+            temp = encodingMap.get(input.get(i,i+16)).encoding;
+            for (int j = 0; j < temp.length(); j++) {
+                if (temp.charAt(j) == '1') {
+                    bitSet.set(currentLength+j);
+                }
             }
+            currentLength+=temp.length();
         }
         return bitSet;
     }
