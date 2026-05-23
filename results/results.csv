@@ -1,0 +1,11 @@
+path, ogSize, compSize, totalTime, readTime, freqTime, constructTime, encodeTime
+books/alices_adventures_in_wonderland.pdf,246901,228138,317,6,88,140,83
+books/aliceintxt.txt,174309,88613,52,2,16,3,31
+books/aliceindjvu.djvu,482974,476113,342,4,69,129,140
+books/aliceinepub.epub,189180,180492,141,2,35,61,43
+books/aliceinmobi.mobi,256218,229861,165,1,30,75,59
+books/the_brothers_karamazov.pdf,5826917,3011001,627,19,291,8,309
+books/karamazovintxt.txt,1982206,1001800,206,4,84,1,117
+books/karamazovindjvu.djvu,5362983,5351019,1703,18,389,77,1219
+books/karamazovinepub.epub,959526,947437,407,1,83,96,227
+books/karamazovinmobi.mobi,1508108,1305638,360,2,82,51,225

@@ -13,7 +13,7 @@ public class Main {
     public static PrintWriter writer;
 
     public static void main(String[] args) throws IOException {
-        writer = new PrintWriter("results/results.txt", "UTF-8");
+        writer = new PrintWriter("results/results.csv", "UTF-8");
         writer.println("path, ogSize, compSize, totalTime, readTime, freqTime, constructTime, encodeTime");
         encodeBook("books/alices_adventures_in_wonderland.pdf");
         encodeBook("books/aliceintxt.txt");
